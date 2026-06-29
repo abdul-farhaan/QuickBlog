@@ -2,6 +2,7 @@ import fs from 'fs'
 import imagekit from '../configs/imageKit.js';
 import Blog from '../models/Blog.js';
 import Comment from '../models/Comment.js';
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 export const addBlog = async (req,res)=>{
     try {
@@ -107,5 +108,14 @@ export const getBlogComments = async (req, res) =>{
         res.json({success: true, comments})
     } catch (error) {
         res.json({success: false, message: error.message})
+    }
+}
+
+export const generateContent = async (req, res) => {
+    try {
+        const { prompt } = req.body
+        res.json({ success: true, content: `This is a sample blog about: ${prompt}` })
+    } catch (error) {
+        res.json({ success: false, message: error.message })
     }
 }
