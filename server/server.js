@@ -2,6 +2,8 @@ import express from 'express'
 import 'dotenv/config'
 import cors from 'cors'
 import connectDB from './configs/db.js';
+import adminRouter from './routes/adminRoutes.js';
+import blogRouter from './routes/blogRoutes.js';
 
 const app = express(); // object to which all the routes and middleware are added to this app
 
@@ -12,6 +14,8 @@ app.use(cors())
 app.use(express.json()) //parse data
 
 app.get('/', (req,res)=> res.send("API is Working")) //whenoutputs "API is Working"
+app.use('/api/admin', adminRouter)
+app.use('/api/blog', blogRouter)
 
 const PORT = process.env.PORT || 3000; //take post from .env if defined else take 3000
 
